@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Potterly | Submission Result {% endblock title %}
+{% block content %}
+<div class="container">
+	<div class="jumbotron my-4 border-warning bg-dark text-white" style="border-bottom-right-radius: 9999px;
+	border: 25px;
+	border-style: double double double none;">
+
+	   	<h3 class="text-white">{{ attempted_question.question.html|safe }}</h3>
+
+		<p>
+		    <strong>Your answer: </strong>
+			<span class="text-warning">
+		    {{ attempted_question.selected_choice.html|safe }}
+			</span>
+		</p>
+
+		{% if attempted_question.selected_choice.is_correct %}
+		<h4 class="text-white">Yayy! Your answer is <span class="text-warning"><strong>correct</strong></span>. Five points to Gryffindor! 🥳</h4>
+		{% else %}
+		<h4 class="text-white">Ouch! Your answer is <span class="text-warning"><strong>incorrect</strong></span> 🤭</h4>
+		{% endif %}
+		<br>
+		<a class="btn btn-outline-warning" href="{% url 'quiz:play' %}">Show next question</a>
+	</div>
+</div>
+
+{% endblock content %}

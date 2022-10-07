@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Potterly | Leaderboard {% endblock title %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">🪄<span class="badge text-warning">TOP {{ total_count }} POTTERHEADS</span>🪄</h1>
+    <table class="table table-dark text-center text-white">
+        <thead>
+            <tr class="text-warning">
+                <th>Rank</th>
+                <th>Potterhead ID</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz_profile in top_quiz_profiles %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ quiz_profile.user.username }}</td>
+                <td>{{ quiz_profile.total_score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

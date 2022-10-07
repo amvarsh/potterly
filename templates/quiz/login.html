@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Potterly | {{ title }} {% endblock title %}
+{% block content %}
+{% if not request.user.is_active %}
+
+    <div class="jumbotron jumbotron-fluid bg-dark text-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 offset-sm-2 offset-md-3 offset-lg-4">
+              <h1 class="mb-3 text-center text-warning">Welcome Back!</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <input type="submit" class="btn btn-warning btn-block mb-3" value="{{ title }}"> 
+                </form>
+              <div class="text-center lead small">
+                Don't have an account yet? 
+                <a href="{% url 'quiz:register' %}" class="text-warning">Sign Up </a>
+                here
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+
+    <section id="section-jumbotron" class="bg-dark text-white jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+      <div class="container text-center">
+        <h1 class="display-1 text-warning"> <strong>Potterly</strong></h1>
+        <p class="display-4">Compete with your fellow potterheads to become the champion.</p>
+        <p class="lead">A journey of spells and charms.</p>
+        <a href="{% url 'quiz:play' %}" class="btn btn-lg btn-warning mt-1">Let's play</a>
+        <a href="{% url 'quiz:leaderboard' %}" class="btn btn-lg btn-warning mt-1">Leaderboard</a>
+      </div>  
+    </section>
+
+{% endif %}
+
+{% endblock content %}
